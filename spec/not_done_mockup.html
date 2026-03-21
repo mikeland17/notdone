@@ -1,0 +1,75 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @keyframes floatA{0%{transform:translateY(0)}100%{transform:translateY(-10px)}}
+  @keyframes floatB{0%{transform:translateY(0)}100%{transform:translateY(-16px)}}
+  @keyframes floatC{0%{transform:translateY(0)}100%{transform:translateY(-7px)}}
+  @keyframes floatD{0%{transform:translateY(0)}100%{transform:translateY(-13px)}}
+  @keyframes floatE{0%{transform:translateY(0)}100%{transform:translateY(-9px)}}
+  @keyframes dotpulse{0%,100%{opacity:1}50%{opacity:0.5}}
+  .titem{transition:opacity 1.8s ease,transform 1.8s ease;cursor:pointer;}
+  .titem:hover .tdot{transform:scale(1.4);}
+  .tdot{transition:background 1.8s ease,transform 0.2s ease;}
+  .ttext{transition:color 1.8s ease,opacity 1.8s ease;}
+  .titem.completing .tdot{background:#22cc66 !important;}
+  .titem.completing .ttext{color:#22cc66 !important;opacity:0.6;}
+  .titem.done{opacity:0;transform:translateY(-18px) !important;pointer-events:none;}
+</style>
+
+<div style="background:#080808;min-height:560px;padding:3.5rem;position:relative;overflow:hidden;box-sizing:border-box;border-radius:8px;">
+
+  <div style="position:absolute;left:3.5rem;top:3.5rem;z-index:10;">
+    <div style="font-family:'Big Shoulders Display',Impact,'Arial Black',sans-serif;font-size:clamp(72px,9vw,114px);font-weight:900;color:#fff;line-height:0.86;text-transform:uppercase;letter-spacing:-2px;user-select:none;">
+      NOT<br>DONE<span id="mdot" style="display:inline-block;width:18px;height:18px;border-radius:50%;background:#ff1a1a;margin-left:10px;vertical-align:middle;transition:background 3s ease;animation:dotpulse 2.4s ease-in-out infinite;"></span>
+    </div>
+    <div id="cline" style="color:#333;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;margin-top:28px;transition:color 1s ease;">— 5 REMAINING</div>
+    <div style="color:#222;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;margin-top:48px;line-height:2;">tap a task to complete it</div>
+  </div>
+
+  <div style="position:absolute;left:3.5rem;bottom:3.5rem;z-index:10;">
+    <div style="width:32px;height:1px;background:#222;"></div>
+  </div>
+
+  <div id="tasks" style="position:absolute;right:3.5rem;top:0;bottom:0;width:40%;display:flex;flex-direction:column;justify-content:space-evenly;padding:3.5rem 0;"></div>
+</div>
+
+<script>
+const data=[
+  {id:1,label:"Brochure builder",sub:"sizing & responsive layout",a:"floatA",d:"4.2s",delay:0},
+  {id:2,label:"EDDM module",sub:"DB caching layer",a:"floatB",d:"5.1s",delay:0.7},
+  {id:3,label:"Staging deploy",sub:"to production",a:"floatC",d:"6s",delay:1.4},
+  {id:4,label:"CloudFront",sub:"cache invalidation fix",a:"floatD",d:"4.7s",delay:2.1},
+  {id:5,label:"USPS routes",sub:"carrier route test coverage",a:"floatE",d:"5.6s",delay:2.8},
+];
+let rem=data.length;
+const wrap=document.getElementById('tasks');
+const mdot=document.getElementById('mdot');
+const cline=document.getElementById('cline');
+
+data.forEach(t=>{
+  const el=document.createElement('div');
+  el.className='titem';
+  el.id='t'+t.id;
+  el.style.cssText=`display:flex;align-items:flex-start;gap:12px;animation:${t.a} ${t.d} ease-in-out infinite alternate;animation-delay:${t.delay}s;`;
+  el.innerHTML=`<span class="tdot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff1a1a;flex-shrink:0;margin-top:4px;"></span><span class="ttext" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#e0e0e0;line-height:1.7;"><strong style="display:block;font-size:12px;font-weight:500;color:#fff;letter-spacing:0.5px;">${t.label}</strong><span style="color:#555;font-size:10px;">${t.sub}</span></span>`;
+  el.addEventListener('click',()=>done(el));
+  wrap.appendChild(el);
+});
+
+function done(el){
+  if(el.classList.contains('completing')||el.classList.contains('done'))return;
+  el.classList.add('completing');
+  setTimeout(()=>{
+    el.classList.add('done');
+    rem--;
+    if(rem===0){
+      cline.textContent='— DONE';
+      cline.style.color='#22cc66';
+      mdot.style.background='#22cc66';
+      mdot.style.animation='none';
+    } else {
+      cline.textContent=`— ${rem} REMAINING`;
+    }
+  },1800);
+}
+</script>
