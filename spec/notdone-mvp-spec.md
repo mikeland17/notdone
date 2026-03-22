@@ -474,8 +474,7 @@ Priority 1 → project name 11px, normal, dot 5px
 
 ## Responsive
 
-Desktop only for MVP. Min-width 900px. No mobile layout — call it out on the page: "Built for your desktop. Mobile coming." in small mono text bottom right.
-
+Fully responsive, Desktop to mobile. This is such a minimal UI, it should be pretty straigght forward.
 ---
 
 ## What Is NOT in MVP

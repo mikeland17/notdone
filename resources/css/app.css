@@ -170,3 +170,62 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* NotDone design tokens */
+:root {
+    --nd-bg: #080808;
+    --nd-white: #ffffff;
+    --nd-muted: #e0e0e0;
+    --nd-dim: #555555;
+    --nd-ghost: #333333;
+    --nd-red: #ff1a1a;
+    --nd-green: #22cc66;
+    --nd-font-display: 'Big Shoulders Display', Impact, 'Arial Black', sans-serif;
+    --nd-font-mono: 'IBM Plex Mono', monospace;
+}
+
+/* NotDone animations — unique float per project for anxious bobbing */
+@keyframes nd-float-a {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+@keyframes nd-float-b {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-16px); }
+}
+@keyframes nd-float-c {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-7px); }
+}
+@keyframes nd-float-d {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-13px); }
+}
+@keyframes nd-float-e {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-9px); }
+}
+@keyframes nd-float-f {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-18px); }
+}
+
+@keyframes nd-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+@keyframes nd-slide-in-right {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes nd-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes nd-fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
