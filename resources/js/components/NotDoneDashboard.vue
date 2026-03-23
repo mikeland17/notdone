@@ -132,7 +132,7 @@ function resetAfterCelebration() {
             </div>
 
             <div v-if="!sessionAllDone" class="nd-bottom-left">
-                <button class="nd-add-project" @click="emit('addProject')">+ add shit to your list</button>
+                <button class="nd-add-project" @click="emit('addProject')">+ add shit to your list [a]</button>
             </div>
         </div>
 

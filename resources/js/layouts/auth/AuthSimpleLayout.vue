@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import { home } from '@/routes';
 
 defineProps<{
@@ -20,13 +19,7 @@ defineProps<{
                         :href="home()"
                         class="flex flex-col items-center gap-2 font-medium"
                     >
-                        <div
-                            class="mb-1 flex h-9 w-9 items-center justify-center rounded-md"
-                        >
-                            <AppLogoIcon
-                                class="size-9 fill-current text-[var(--foreground)] dark:text-white"
-                            />
-                        </div>
+                        <div class="nd-auth-dot"></div>
                         <span class="sr-only">{{ title }}</span>
                     </Link>
                     <div class="space-y-2 text-center">
@@ -41,3 +34,13 @@ defineProps<{
         </div>
     </div>
 </template>
+
+<style scoped>
+.nd-auth-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--nd-red);
+    animation: nd-pulse 2.4s ease-in-out infinite;
+}
+</style>
