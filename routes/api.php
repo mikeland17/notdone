@@ -7,7 +7,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/generate-tasks', function (Request $request) {
+Route::middleware('throttle:10,1')->post('/generate-tasks', function (Request $request) {
+    $request->validate([
+        'project' => ['required', 'string', 'max:255'],
+        'priority' => ['sometimes', 'integer', 'min:1', 'max:5'],
+    ]);
+
     $project = $request->input('project');
     $priority = $request->input('priority', 3);
 
